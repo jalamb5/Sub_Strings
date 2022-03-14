@@ -1,11 +1,21 @@
 def substrings(string, dictionary)
-    words = string.split(' ')
+    words = string.downcase.gsub(/[^a-z0-9\s]/i, '').split(' ')
     count = Hash.new
     words.each do |word|
-        if dictionary.include?(word)
-            if count.has_key?(word)
-                count[word] += 1
-            else count[word] = 1
+        length = word.length
+        subword_list = []
+        for i in 0..length do
+            subword_list << word[0, i]
+            subword_list << word[i, length-1]
+            subword_list << word[i]
+        end
+        unique_subwords = subword_list.uniq
+        unique_subwords.each do |subword|
+            if dictionary.include?(subword)                
+                if count.has_key?(subword)
+                    count[subword] += 1
+                else count[subword] = 1
+                end
             end
         end
     end
