@@ -5,9 +5,9 @@ def substrings(string, dictionary)
         length = word.length
         subword_list = []
         for i in 0..length do
-            subword_list << word[0, i]
-            subword_list << word[i, length-1]
-            subword_list << word[i]
+            subword_list << word[0, i] # looks at permutations of word from front to back
+            subword_list << word[i, length-1] # looks at permutations of word from back to front
+            subword_list << word[i] # looks at each individual char to make sure single letter words ('i', 'a') are caught
         end
         unique_subwords = subword_list.uniq
         unique_subwords.each do |subword|
